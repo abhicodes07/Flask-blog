@@ -32,4 +32,7 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, world! This is Flask'
     
+    from . import db
+    db.init_app(app)
+    
     return app
