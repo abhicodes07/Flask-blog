@@ -63,7 +63,7 @@ def register():
         flash(error)
 
     # render the form template for inputs
-    return render_template('auth/register.html')
+    return render_template('register.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -95,7 +95,7 @@ def login():
             return redirect(url_for('index'))
         
         flash(error)
-    return render_template('auth/login.html')
+    return render_template('/login.html')
 
 # bp.before_app_request() registers a function that runs before the view function, 
 # no matter what URL is requested.
@@ -109,7 +109,7 @@ def load_logged_in_user():
     else:
         # get user data form the database
         g.user = get_db().execute(
-            'SELECT * FORM user WHERE id = ?', (user_id,)
+            'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
 # logout
@@ -125,5 +125,5 @@ def login_required(view):
         if g.user is None:
             return redirect(url_for('auth.login'))
         return view(**kwargs)
-        
+
     return wrapped_view
