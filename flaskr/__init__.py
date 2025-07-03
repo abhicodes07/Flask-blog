@@ -33,6 +33,9 @@ def create_app(test_config=None):
         return 'Hello, world! This is Flask'
     
     from . import db
+    from . import auth
+
+    app.register_blueprint(auth.bp)
     db.init_app(app)
     
     return app
